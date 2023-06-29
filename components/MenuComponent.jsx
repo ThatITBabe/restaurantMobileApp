@@ -18,7 +18,7 @@ const MenuComponent = ({ food }) => {
                     <Text style={styles.foodName}>{food.name}</Text>
                     <Text>{food.price}</Text>
                     <Text style={styles.pressedIconContainerz}>
-                        {[0, 0, 0, 0, 0].map((en, i) => (
+                        {[0, 0, 0, 0, 0].map   ((en, i) => (
                             <FontAwesome
                                 // key={`${food.id}-${i}`}
                                 style={styles.ratingIconz}

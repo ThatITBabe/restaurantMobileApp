@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 
 const MenuScreen = () => {
     const cart = useSelector((state) => state.cart.cart)
+    const total = cart.map((item) => item.price * item.quantity).reduce((curr, prev) => curr + prev, 0)
+    console.log(total)
     console.log(cart)
     const route = useRoute();
     const navigation = useNavigation();
@@ -34,9 +36,9 @@ const MenuScreen = () => {
             <ScrollView style={styles.menuScreen}>
                 <View style={styles.menuScreenContainer}>
                     <View style={styles.menuScreenHeader}>
-                        <Ionicons onPress={() => navigation.goBack()} name="arrow-back-outline" size={24} color="black" />
+                        <Ionicons onPress={() => navigation.goBack()} name="arrow-back-outline" size={24} color="white" />
                         <View style={styles.iconContainerz}>
-                            <AntDesign name="search1" size={22} color="black" />
+                            <AntDesign name="search1" size={22} color="white" />
                             <Text style={styles.iconTextz}>Search</Text>
                         </View>
                     </View>
@@ -44,8 +46,8 @@ const MenuScreen = () => {
                         <View style={styles.whiteContainerSet}>
                             <Text style={styles.whiteContainerHeader}>{route.params.name}</Text>
                             <View style={styles.whiteContainerIcons}>
-                                <AntDesign style={styles.whiteContainerShareIcon} name="sharealt" size={24} color="black" />
-                                <AntDesign name="hearto" size={24} color="black" />
+                                <AntDesign style={styles.whiteContainerShareIcon} name="sharealt" size={24} color="white" />
+                                <AntDesign name="hearto" size={24} color="white" />
                             </View>
                         </View>
 
@@ -105,10 +107,36 @@ const MenuScreen = () => {
                     ))}
 
                     <View style={styles.modalContainerImage}>
-                        <Image style={styles.modalImage} source = {{uri: "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_284/Logo_f5xzza"}}/>
+                        <Image style={styles.modalImage} source={{ uri: "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_284/Logo_f5xzza" }} />
                     </View>
                 </View>
             </Modal>
+
+
+            {total === 0 ? null : (
+                <Pressable style={styles.cartContainer}>
+                    <View style={styles.cartContainerz}>
+                        <View>
+                            <Text style={styles.cartText}>
+                                {cart.length} items || {total}
+                            </Text>
+                            <Text style={styles.cartTextz}>
+                                Extra Charges may Apply!!!
+                            </Text>
+                        </View>
+
+                        <Pressable onPress={() =>
+                            navigation.navigate("Cart", {
+                                name: route.params.name,
+                            })
+                        }>
+                            <Text style={styles.cartPageOpener}>
+                                View Cart
+                            </Text>
+                        </Pressable>
+                    </View>
+                </Pressable>
+            )}
         </>
     )
 }
@@ -121,7 +149,8 @@ const styles = StyleSheet.create({
     },
     menuScreenContainer: {
         height: 300,
-        backgroundColor: "#b0c4de",
+        backgroundColor: "orange",
+        // backgroundColor: "#b0c4de",
         borderBottomLeftRadius: 40,
         borderBottomRightRadius: 40
     },
@@ -138,7 +167,8 @@ const styles = StyleSheet.create({
     iconTextz: {
         fontSize: 16,
         fontWeight: "600",
-        marginLeft: 4
+        marginLeft: 4,
+        color: 'white'
     },
     whiteContainer: {
         backgroundColor: 'white',
@@ -265,5 +295,38 @@ const styles = StyleSheet.create({
         width: 120,
         height: 70,
         resizeMode: 'contain'
+    },
+    cartContainer: {
+        backgroundColor: 'orange',
+        // backgroundColor: '#00a877',
+        width: '90%',
+        padding: 13,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginBottom: 30,
+        borderRadius: 8,
+        left: 20,
+        bottom: 10
+    },
+    cartContainerz: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    cartText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white'
+    },
+    cartTextz: {
+        fontSize: 14,
+        fontWeight: '500',
+        marginTop: 3,
+        color: 'white'
+    },
+    cartPageOpener: {
+        fontSize: 18,
+        fontWeight: '900',
+        color: 'white'
     }
 })
