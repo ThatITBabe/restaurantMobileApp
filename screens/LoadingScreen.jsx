@@ -3,7 +3,8 @@ import React, { useEffect, } from "react";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const LoadingScreen = () => {
+const 
+LoadingScreen = () => {
     const navigation = useNavigation();
     useEffect(() => {
         setTimeout(() => {

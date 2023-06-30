@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "practiceTwo",
-    "slug": "practiceTwo",
+    "name": "SwiggyRestaurant App",
+    "slug": "swiggyrestaurant-app",
+    "description":  "This is my first attempt at react native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/hicon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/spla.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000"
     },
     "assetBundlePatterns": [
       "**/*"
